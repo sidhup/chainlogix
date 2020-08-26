@@ -1,0 +1,38 @@
+<mat-card>
+  <mat-card-content>
+    <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+      <h2>Signup/User Registration</h2>
+      <mat-form-field class="full-width-input">
+        <input matInput type="UserName" placeholder="UserName" name="UserName" ngModel required />
+      </mat-form-field>
+      <mat-form-field class="full-width-input">
+        <input matInput placeholder="Email" type="email" id="email" ngModel name="email" required email #email="ngModel"
+          required />
+        <mat-error *ngIf="!email.valid && email.touched">
+          Please provide a valid email address
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="full-width-input">
+        <input matInput type="password" id="password" name="password" ngModel placeholder="Password" required
+          minlength="6" />
+        <mat-error *ngIf="!f.valid">password must be entered & it should be 6 digit and above</mat-error>
+      </mat-form-field>
+      <mat-form-field class="full-width-input">
+        <input matInput [matDatepicker]="picker" placeholder="Choose a date" id="datepicker" name="datepicker" ngModel
+          required />
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+
+        <mat-error *ngIf="!f.valid">
+          Please provide a valid D.O.B
+        </mat-error>
+      </mat-form-field>
+      <button mat-raised-button color="primary" type="submit" [disabled]="!f.valid">
+        Signup
+      </button>
+    </form>
+  </mat-card-content>
+  <button mat-raised-button (click)="loginPage()" color="primary">
+    Switch to login
+  </button>
+</mat-card>
